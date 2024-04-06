@@ -1,4 +1,9 @@
-[cluster]
-server1 ansible_user=vagrant ansible_host=127.0.0.1 ansible_port=2223
+[manager]
 server2 ansible_user=vagrant ansible_host=127.0.0.1 ansible_port=2224
+
+[deploy]
+server1 ansible_user=vagrant ansible_host=127.0.0.1 ansible_port=2223
+
+[cluster]
 server3 ansible_user=vagrant ansible_host=127.0.0.1 ansible_port=2225
+

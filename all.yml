@@ -1,7 +1,20 @@
 ---
-- name: Stages
-  hosts: cluster
+- name: Deploy server
+  hosts: deploy
   roles:
     - preconfig
     - deploy
+    #- swarm_init
+
+- name: Manager
+  hosts: managers
+  roles:
+    - preconfig
+    #- swarm_join
+
+- name: Worker
+  hosts: cluster
+  roles:
+    - preconfig
+   # - swarm_join
     
