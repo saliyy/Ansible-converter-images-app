@@ -1,0 +1,7 @@
+---
+- name: Stages
+  hosts: cluster
+  roles:
+    - preconfig
+    - deploy
+    
