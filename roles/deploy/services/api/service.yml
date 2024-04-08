@@ -1,18 +1,7 @@
 ---
 - name: "[{{ name }}] Config secret"
-  block:
-  - name: "[{{ name }}] Create secret"
-    ansible.builtin.include_tasks:
-      file: "../secret.yml"
-  rescue:
-    - name: "[{{ name }}] Remove service"
-      community.docker.docker_swarm_service:
-        name: "{{ name }}"
-        state: absent
-
-    - name: "[{{ name }}] Create secret"
-      ansible.builtin.include_tasks:
-        file: "../secret.yml"
+  ansible.builtin.include_tasks:
+    file: "../secret.yml"
 
 
 - name: "[{{ name }}] deploy"
