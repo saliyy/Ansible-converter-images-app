@@ -1,0 +1,27 @@
+---
+- name: "[{{ name }}] Create secret"
+  community.docker.docker_secret:
+    name: "{{name}}.env"
+    data: "{{ lookup('file', '.env') | base64encode }}"
+    labels:
+      secret: "{{ lookup('file', '.env') | hash('sha1') }}"
+    data_is_bs64: true
+    state: present
+
+- name: "[{{ name }}] deploy"
+  community.docker.docker_swarm_service:
+    name: "{{ name }}"
+    image: localhost:5000/api:latest
+    state: present
+    networks:
+      - name: "{{ networkName }}"
+    publish:
+      - mode: ingress
+        protocol: tcp
+        published_port: 3002
+        target_port: 3000
+    secrets:
+      secret_name: "{{name}}.env"
+      filename: /opt/app/.env
+
+
