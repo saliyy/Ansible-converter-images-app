@@ -5,7 +5,7 @@ services:
     restart: always
     secrets:
     - source: api.env
-    - target: /opt/app/.env
+    - target: /opt/app/.env.j2
     ports:
     - 3002:3000
     networks:

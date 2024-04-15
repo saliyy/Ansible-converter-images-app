@@ -9,7 +9,7 @@
   - name: "[{{ name }}] deploy service"
     community.docker.docker_swarm_service:
       name: "{{ name }}"
-      image: localhost:5000/api:latest
+      image: "{{ registry_name }}{{ name }}:{{ version }}"
       state: present
       networks:
         - name: "{{ networkName }}"
@@ -20,6 +20,7 @@
           target_port: 3000
       secrets:
         - secret_name: "{{name}}.env"
-          filename: /opt/app/.env
+          filename: "/opt/app/.env.j2"
+  tags: "{{ name }}"
 
 
