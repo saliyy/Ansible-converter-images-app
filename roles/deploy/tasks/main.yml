@@ -6,9 +6,9 @@
 
 - name: deploy services
   ansible.builtin.include_tasks:
-    file: "../services/{{ item }}/service.yml"
+    file: "../services/{{ item.name }}/service.yml"
     apply:
-      tags: "{{ item }}"
+      tags: "{{ item.name }}"
   vars:
     - name: "{{ item.name }}"
     - version: "{{ item.version }}"

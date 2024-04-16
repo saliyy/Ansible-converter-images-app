@@ -1,0 +1,21 @@
+---
+- name: "[{{ name }}] Config secret"
+  ansible.builtin.include_tasks:
+    file: "../secret.yml"
+
+
+- name: "[{{ name }}] deploy"
+  block:
+    - name: "[{{ name }}] deploy service"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ networkName }}"
+        secrets:
+          - secret_name: "{{name}}.env"
+            filename: "/opt/app/.env"
+  tags: "{{ name }}"
+
+
