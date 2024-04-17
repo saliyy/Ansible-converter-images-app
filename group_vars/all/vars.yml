@@ -36,5 +36,8 @@ configs:
     queue: q_imageProcessor
 
 
+advertise_addr: 10.11.10.1
+
+
 #SKIP_PREFLIGHT_CHECK=true
 #REACT_APP_API_URL=http://localhost:3000
