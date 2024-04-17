@@ -21,9 +21,13 @@ services:
     version: latest
   - name: rmq
     version: latest
+  - name: nginx
+    version: latest
 
 non_built_services:
   - name: rmq
+    version: latest
+  - name: nginx
     version: latest
 
 
