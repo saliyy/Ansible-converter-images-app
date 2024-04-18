@@ -1,0 +1,18 @@
+---
+- name: Set node to drain [{{ node_to_drain }}]
+  community.docker.docker_node:
+    hostname: "{{ node_to_drain }}"
+    availability: drain
+
+
+- name: Get info on docker host and list containers matching the filter [{{ node_to_drain }}]
+  community.docker.docker_host_info:
+    containers: true
+  register: result
+  retries: 30
+  delay: 2
+  until: result.host_info.ContainersRunning == 0
+  delegate_to: "{{ node_to_drain }}"
+
+- name: Remove node [{{ node_to_drain }}]
+  command: "docker node rm {{ node_to_drain }} --force"

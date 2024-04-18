@@ -10,6 +10,8 @@
       tags: deploy
     - role: swarm_init
       tags: swarm_init
+    - role: swarm_leave
+      tags: swarm_leave
 
 - name: Manager
   hosts: managers
